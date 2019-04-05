@@ -1,0 +1,47 @@
+1.
+
+//Array input
+var lineForRide = ["Vivian", "Ava", "Josh", "Patrick", "Mike"];
+
+//Inserting new person to the line
+lineForRide.push("Mary");
+console.log(lineForRide);
+
+function searchForRider(name) {
+    for(i = 0; i < lineForRide.length; i++) {
+       if(name === lineForRide[i]){
+           console.log(i);
+           return true
+
+       } else if (name != lineForRide[i]) {
+           console.log("This rider is not in line.");
+           return false;
+       }
+    }
+}
+
+//Searching for someone in line
+searchForRider("Vivian")
+
+//Adding new person in line to specific index
+lineForRide.splice(1, 0, "Melissa");
+console.log(lineForRide);
+
+//Removing someone from line
+lineForRide.splice(3, 1);
+console.log(lineForRide);
+
+2. Car production is another real-world example that you can model using a data
+structure. Car factories will often have an assembly line that resembles an
+array where cars may have to be added in order or at random locations depending
+on the exact configurations of the builds. Cars can be added to the front of
+the assembly line or inserted in a specific index if the car needs to be
+completed sooner.
+
+3. Developers would have access to the data so that they can make necessary
+adjustments when new models of cars are introduced into the manufacturing
+facility and the programs need to be updated to account for the new cars.
+They would also be able to keep track of the pace which cars are being
+manufactured to find inefficiencies. Developers could also search for specific
+models if there was a recall on manufacturing and some cars had to be removed
+or updated.
