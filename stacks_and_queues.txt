@@ -1,0 +1,66 @@
+Exercises
+
+1. The main difference is the way data is managed. Stacks use a LIFO method
+which means the last element to be added on is the first to go out. Queues are
+FIFO so they work like a line in a drive thru.
+
+2. The both can add and remove data, although they each have a different order
+in which they do that. Developers are able to rank tasks and create an order
+of operations.
+
+3. UNDO could be implemented using a stack. Each time a character would be typed
+it would be popped to the end of the stack and if the user presses UNDO then
+that last element would be reversed. REDO could be implemented using a queue.
+As the user types or makes changes the initial state before saving would be
+added to the queue and when the user hits REDO, that first element would be
+called. The QUEUE would reset after the user hits save.
+
+Programming Questions
+
+1.
+
+function reverseString(str) {
+    var newString = "";
+    for (var i = str.length - 1; i >= 0; i--) {
+        newString += str[i];
+    }
+    return newString;
+}
+
+reverseString("Horses in the back");
+
+2 & 1. 
+
+//Creating queue data structure
+function Queue() {
+  this.elements = [];
+}
+
+//Enqueue method that adds element to queue
+Queue.prototype.enqueue = function (e) {
+   this.elements.push(e);
+};
+
+//Dequeue method to remove last element from data structure
+Queue.prototype.dequeue = function (e) {
+   this.elements.pop(e);
+};
+
+//Pops the last element from the queue like a stack would
+function popFromQueue(){
+    q.dequeue(q.length -1);
+}
+
+//Creating new queue
+var q = new Queue()
+
+//Loop to add elements to the queue
+for (var i = 1; i <= 7; i++) {
+    q.enqueue(i);
+}
+
+console.log(q.elements);
+q.enqueue(8);
+console.log(q.elements);
+popFromQueue();
+console.log(q.elements);
