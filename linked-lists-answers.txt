@@ -1,0 +1,15 @@
+Exercises
+1. A benefit to using a linked list versus an array is that the elements can be
+saved and accessed in memory as you need them instead of requiring a set
+amount of memory like an array element. This also allows us to grow our linked
+lists enormously. A con is that it can get difficult to search for a single node
+because we would have to search through all nodes to find the specific one,
+whereas arrays can be searched by the specific index where they're located.
+
+2. Users on social media sites like facebook could be organized as a linked list
+because of the way they are able to recommend friends based on mutual
+connections. Your user profile could be the head of the node and as you link
+with another friend, your network of possible friend suggestions could grow
+larger and larger.
+
+Programming Questions

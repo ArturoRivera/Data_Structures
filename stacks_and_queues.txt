@@ -8,12 +8,12 @@ FIFO so they work like a line in a drive thru.
 in which they do that. Developers are able to rank tasks and create an order
 of operations.
 
-3. UNDO could be implemented using a stack. Each time a character would be typed
-it would be popped to the end of the stack and if the user presses UNDO then
-that last element would be reversed. REDO could be implemented using a queue.
-As the user types or makes changes the initial state before saving would be
-added to the queue and when the user hits REDO, that first element would be
-called. The QUEUE would reset after the user hits save.
+3. There would be two stacks in order to to implement the two features. One
+stack would keep track of any commands and you would be able to pop the last
+command when a user presses UNDO. The other stack would keep track of the
+commands that were popped from the first stack and keep them until the user
+presses REDO. This would pop the command from the second stack in order to
+execute the command again.
 
 Programming Questions
 
@@ -29,7 +29,7 @@ function reverseString(str) {
 
 reverseString("Horses in the back");
 
-2 & 1. 
+2 & 1.
 
 //Creating queue data structure
 function Queue() {
