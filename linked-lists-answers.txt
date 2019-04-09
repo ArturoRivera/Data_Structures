@@ -13,3 +13,145 @@ with another friend, your network of possible friend suggestions could grow
 larger and larger.
 
 Programming Questions
+
+1. In the ELSE statement, the pseudocode is setting the node to be the next
+node after the head node. If there are already elements after the head node,
+the node we are trying to push would not be added to the end of the linked list.
+
+FUNCTION push(element)
+CREATE node
+SET node.value TO element
+SET node.next TO null
+
+IF the head node does not exist
+   THEN SET head to node
+ELSE
+   SET current to head
+   WHILE current.next != null
+      SET current = current.next
+   END WHILE
+   SET current to node
+END IF
+END FUNCTION
+
+2.
+
+class LinkedList {
+
+  constructor() {
+    this.head = null;
+  }
+
+
+  addNode(value) {
+    var node = {
+      data: value,
+      next: null
+    };
+
+    if (!this.head) {
+      this.head = node;
+    } else {
+      var p1 = this.head;
+      while (p1.next) {
+        p1 = p1.next;
+      }
+      p1.next = node;
+    }
+  }
+
+}
+//Creating new instance of linked list
+var L1 = new LinkedList();
+
+//Adding duplicate elements
+var testData = [5,5];
+
+testData.forEach(element => L1.addNode(element));
+console.log(L1);
+
+//Method for checking and removing duplicates
+LinkedList.prototype.removeDuplicates = function () {
+    // Empty or a single element Linked List
+    if (!this.head || !this.head.next) {
+      console.log('No duplicates were found. Empty or a single element Linked List.');
+      return;
+    }
+
+    var p1;
+    var p2;
+    var nodes = {};
+
+    p1 = this.head;
+    p2 = p1.next;
+    nodes[p1.data] = true;
+
+    while (p2) {
+        var data = p2.data;
+        if (nodes[data]) {
+            p1.next = p2.next;
+        } else {
+            nodes[data] = true;
+            p1 = p2;
+        }
+        p2 = p2.next;
+    }
+};
+
+L1.removeDuplicates();
+console.log(L1);
+
+3.
+
+class LinkedList {
+
+  constructor() {
+    this.head = null;
+  }
+
+
+  addNode(value) {
+    var node = {
+      data: value,
+      next: null
+    };
+
+    if (!this.head) {
+      this.head = node;
+    } else {
+      var p1 = this.head;
+      while (p1.next) {
+        p1 = p1.next;
+      }
+      p1.next = node;
+    }
+  }
+}
+
+LinkedList.prototype.reverse = function() {
+  var current = this.head;
+  var next = null;
+  var prev = null;
+
+  while(current) {
+    next = current.next;
+
+    current.next = prev;
+
+    prev = current;
+
+    current = next;
+  }
+  this.head = prev;
+}
+
+//Creating new instance of linked list
+var linkedList1 = new LinkedList();
+linkedList1.addNode(10);
+linkedList1.addNode(30);
+linkedList1.addNode(50);
+console.log(linkedList1);
+
+//Reversing linked list
+linkedList1.reverse();
+console.log(linkedList1);
