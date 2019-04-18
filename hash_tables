@@ -1,0 +1,209 @@
+Exercises
+
+1. A hash table is is a type of data structure that stores values with a
+key-value relationship. The keys are converted into hash codes so that the hash
+table can easily manage and search for the values associated with the keys.
+
+2. Hashing is when keys, usually strings, are converted to a hash code so that
+the hash table knows where to store or search for the value tied to that key.
+
+3. First, the hash table takes a key and converts it to a hash code. Then, it
+MODs the hash code to get the specific array index where it'll store the value.
+
+4. Hash tables store similar types of data in one location and is saved using
+a unique identifier. Objects usually hold different data types bundled together
+in a way that establishes the requirements for the object.
+
+5.
+A list of pets and their unique names. HASH TABLE
+The name, age, and the birthday of your best friend. OBJECT
+The name and location of every company in a given city. HASH TABLE
+All of the books checked out from a library by a particular individual. HASH TABLE
+The primary and secondary phone numbers for a contact. HASH TABLE
+
+Programming Questions
+
+1.
+//Hash Function
+var hash = (string, max) => {
+  var hash = 0;
+  for (var i = 0; i < string.length; i++) {
+    hash += string.charCodeAt(i);
+  }
+  return hash % max;
+};
+
+let HashTable = function() {
+
+  let storage = [];
+  const storageLimit = 10;
+
+  this.print = function() {
+    console.log(storage)
+  }
+
+  this.add = function(key, value, value2) {
+    var index = hash(key, storageLimit);
+    if (storage[index] === undefined) {
+      storage[index] = [
+        [key, value, value2]
+      ];
+    } else {
+      var inserted = false;
+      for (var i = 0; i < storage[index].length; i++) {
+        if (storage[index][i][0] === key) {
+          storage[index][i][1] = value;
+          inserted = true;
+        }
+      }
+      if (inserted === false) {
+        storage[index].push([key, value, value2]);
+      }
+    }
+  };
+
+  this.lookup = function(key) {
+    var index = hash(key, storageLimit);
+    if (storage[index] === undefined) {
+      return undefined;
+    } else {
+      for (var i = 0; i < storage[index].length; i++) {
+        if (storage[index][i][0] === key) {
+          return storage[index][i][1];
+        }
+      }
+    }
+  };
+
+};
+
+
+//console.log(hash('Arturo', 10))
+
+let ht = new HashTable();
+//Adding elements to hash table. Phone Number, Name, Address
+ht.add('9490193777', 'Tay', '142 N Lake St.');
+ht.add('9518376452', 'Shanel', '69 W Main St.');
+ht.add('7146289039', 'Katie', '623 Riverrun Rd.');
+//Lookup by phone number
+console.log(ht.lookup('9490193777'))
+ht.print();
+
+2.
+function hash(key, size){
+	var hash = 0;
+	for(var i = 0; i < key.length; i++){
+		hash += key.charCodeAt(i);
+	}
+
+	return hash % size;
+}
+
+function hashTable(){
+	var container = [];
+  var containerCap = 40;
+
+	this.set = function(item, quantity){
+		var index = hash(item, containerCap);
+
+		if(container[index] === undefined){
+			container[index] = [ [item, quantity] ];
+		}
+	};
+
+	this.get = function(item){
+		var index = hash(item, containerCap);
+
+		if(container[index] === undefined){
+    		return "The inventory list is empty";
+  	} else {
+    		for(var i = 0; i < container[index].length; i++) {
+      		if(container[index][i][0] === item) {
+        			return "There's " + container[index][i][1] + " " + container[index][i][0] + " in stock";
+      		} else {
+    				return "Item not found";
+      		}
+    		}
+    }
+
+  };
+}
+
+var inventory = new hashTable();
+inventory.set("Egg Cartons", "20");
+inventory.set("Steaks", "10");
+inventory.set("Cereal Boxes", "100");
+
+console.log(inventory.get("Egg Cartons"));
+console.log(inventory.get("Steaks"));
+console.log(inventory.get("Cereal Boxes"));
+
+3.
+function hash(key, size){
+	var hash = 0;
+  for(var i = 0; i < key.length; i++){
+    hash += key.charCodeAt(i);
+  }
+
+  return hash % size;
+}
+
+function hashTableByPublisher(){
+  var container = [];
+  var containerCap = 100;
+
+  this.set = function(publisher, date, article){
+    var index1 = hash(publisher, containerCap);
+    var index2 = hash(date, containerCap);
+
+    if(container[index1] === undefined){
+      container[index1] = [ [publisher, date, article] ];
+    }
+
+    if(container[index2] === undefined){
+      container[index2] = [ [publisher, date, article] ];
+    }
+  };
+
+  this.getByPublisher = function(publisher){
+    var index = hash(publisher, containerCap);
+    if(container[index] === undefined) {
+        return "The publisher list is empty";
+    } else {
+        for(var i = 0; i < container[index].length; i++) {
+          if(container[index][i][0] === publisher) {
+              return "Publisher: " + container[index][i][0] + ", date published: " + container[index][i][1] + ", article: " + container[index][i][2];
+          } else {
+            return "publisher not found";
+          }
+        }
+    }
+  };
+
+  this.getByDate = function(date){
+    var index = hash(date, containerCap);
+
+    if(container[index] === undefined) {
+        return "The newspaper list is empty";
+    } else {
+        for(var i = 0; i < container[index].length; i++) {
+          if(container[index][i][1] === date) {
+              return "Publisher: " + container[index][i][0] + ", date published: " + container[index][i][1] + ", article: " + container[index][i][2];
+          } else {
+            return "date not found";
+          }
+        }
+    }
+  };
+
+}
+
+
+var newspaper = new hashTableByPublisher();
+
+newspaper.set("Complex", "2012", "Content for newspaper");
+newspaper.set("New York Times", "2018", "Content for newspaper");
+
+
+console.log(newspaper.getByPublisher("Complex"));
+console.log(newspaper.getByDate("2018"));
