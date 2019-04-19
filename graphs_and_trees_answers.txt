@@ -1,0 +1,234 @@
+Exercises
+
+1. What is a binary tree and what makes it unique to other trees?
+  - Binary trees are unique because each node can only have two children nodes.
+  In a binary tree you can only one a left node and a right node, whereas other
+  trees can have multiple nodes connected to one node.
+
+2. What is a heuristic?
+  - Heuristics are guesses that an algorithm makes to solve a complex problem
+  sooner by sacrificing accuracy.
+
+3. What is another problem besides the shortest-path problem that requires the
+use of heuristics?
+  - Anti virus programs will often infer that files are corrupt or that a
+  computer has a virus because code is structured in a certain way.
+
+4. What is the difference between a depth-first search and a breadth-first
+search?
+  - In a depth-first search, it starts at a node and goes down along each branch
+  before backtracking and starting on the next branch. In a breadth-first
+  search, it searches through each level before moving onto the one before it.
+
+5. Explain in your own words what an undirected, a-cyclic, unweighted graph is.
+  - This would be a graph where nodes don't indicate the start nor the end of
+  the graph and it does not form loops. Because it is unweighted, the graph
+  does not assign the cost of travel between each node.
+
+6. What kind of graph is a binary search tree?
+  - Directed, a-cyclic, unweighted graph.
+
+Programming Questions
+
+1.
+
+/** Started with the implementation of the tree. The search function takes the
+data and compares it to the node. If the number is lower than the node we are on
+it goes to the left mode and compares. If the number is greater than the node
+we move to the right node. We repeat this process until we find a match or we
+run out of nodes to compare. **/
+
+class Node {
+  constructor(data, left = null, right = null) {
+    this.data = data;
+    this.left = left;
+    this.right = right;
+  }
+}
+
+class binarySearchTree {
+  constructor() {
+    this.root = null
+  }
+
+  add(data) {
+    const node = this.root;
+    if (node === null) {
+      this.root = new Node(data);
+      return;
+    } else {
+      const searchTree = function(node) {
+        if (data < node.data) {
+          if(node.left === null) {
+            node.left = new Node(data);
+            return;
+          } else if (node.left !== null) {
+            return searchTree(node.left);
+          }
+        } else if (data > node.data) {
+          if (node.right === null) {
+            node.right = new Node(data);
+            return;
+          } else if (node.right !== null) {
+            return searchTree(node.right);
+          }
+        } else {
+          return null;
+        }
+      };
+      return searchTree(node);
+    }
+  };
+
+  searchNumber(data) {
+    let current = this.root;
+    while (current) {
+      if (data === current.data) {
+        return "The number " + data + " exists in the tree.";
+      }
+      if (data < current.data) {
+        current = current.left;
+      } else {
+        current = current.right;
+      }
+    }
+    return "The number " + data + " does not exist in the tree.";
+  };
+}
+
+
+const binaryTree = new binarySearchTree();
+binaryTree.add(8);
+binaryTree.add(3);
+binaryTree.add(10);
+binaryTree.add(1);
+binaryTree.add(6);
+binaryTree.add(14);
+binaryTree.add(4);
+binaryTree.add(7);
+binaryTree.add(13);
+console.log(binaryTree.searchNumber(10));
+console.log(binaryTree.searchNumber(2));
+
+2.
+class Node {
+  constructor (value, left, right) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+class BinarySTree {
+  constructor () {
+    this.root = null;
+}
+
+getRoot(){
+  return this.root;
+}
+
+add(value) {
+    const node = this.root;
+    if (node === null) {
+      this.root = new Node(value);
+      return;
+    } else {
+      const searchTree = function(node) {
+        if (value < node.value) {
+          if (node.left === null) {
+            node.left = new Node(value);
+            return;
+          } else if (node.left !==null) {
+            return searchTree(node.left);
+          }
+          } else if (value > node.value) {
+            if (node.right === null) {
+            node.right = new Node (value);
+            return;
+          } else if (node.right !== null) {
+            return searchTree(node.right);
+          }
+        } else{
+          return null;
+        }
+      };
+      return searchTree(node);
+    }
+}
+
+find(value) {
+  let current = this.root;
+  while (current) {
+      if(value === current.value) {
+        return true;
+      } else if (value < current.value) {
+        current = current.left;
+      } else {
+        current = current.right;
+      }
+  }
+  return false;
+}
+
+findLCA(root, n1, n2){
+  let ancestor = this.root;
+
+    while (ancestor){
+      if (n1 === ancestor.value || n2 === ancestor.value) {
+        return ancestor;
+      }
+
+      if ((n1 < ancestor.value && n2 > ancestor.value) ||
+        (n1 > ancestor.value && n2 < ancestor.value))
+      {
+        return ancestor;
+      }
+
+      if (n1 < ancestor.value && n2 < ancestor.value) {
+        ancestor = ancestor.left;
+      } else {
+          ancestor = ancestor.right;
+      }
+  }
+  return ancestor;
+}
+
+pathLength(root, node){
+  let current = root;
+  let i = 0;
+      while (current && current.value != node) {
+        if (node < current.value ){
+          current = current.left;
+        } else {
+          current = current.right;
+        }
+        i++;
+      }
+      return i;
+  }
+
+findDistance(root, n1, n2) {
+  let LCA = this.findLCA(root.value, n1, n2);
+
+  let distance = this.pathLength(LCA, n1) + this.pathLength(LCA, n2);
+  return distance;
+}
+}
+
+let binaryTree = new BinarySTree();
+
+binaryTree.add(8);
+binaryTree.add(3);
+binaryTree.add(10);
+binaryTree.add(1);
+binaryTree.add(6);
+binaryTree.add(14);
+binaryTree.add(4);
+binaryTree.add(7);
+binaryTree.add(13);
+console.log('Path Length of root to node:', binaryTree.pathLength(8, 1));
+console.log('Distance between 1 and 10 is:', binaryTree.findDistance(8, 1, 10));
+console.log('Distance between 6 and 14 is:', binaryTree.findDistance(8, 6, 14));
+console.log('Distance between 4 and 7 is:', binaryTree.findDistance(8, 4, 7));
+console.log('Distance between 1 and 7 is:', binaryTree.findDistance(8, 1, 7));
